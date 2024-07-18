@@ -1,9 +1,9 @@
 /*************************************************************************************
- * shellfuncts.h - header file for your shell functions
- *
+ * shellfuncts.h - header file for shell functions
+ * Threlkeld
  *************************************************************************************/
 
-// Replace these with something useful
-int hello(int param1);
-void send_msg(const char *param2);
-
+void dir();
+void create (char fileName[], char silent);
+void update (char fileName[], int numberRepeats, char myText[], char silent);
+void list (char fileName[]);
