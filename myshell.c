@@ -21,7 +21,6 @@ int main(int argv, const char *argc[]) {
 
 //int commandCount = 0;
 char argumentArray[5][255]; //will be used to store command and arguments, length set based on googling max unix filename length
-int writeLock[2];
 
 do
 {
@@ -152,21 +151,10 @@ do
 						printf("invalid number or non-number of repeats requested\n");
 						exit(0);
 					}
-					//do we need to prevent multiple simultaneous writes?
-				else if (writeLock[0]==myFile)
-				{
-					printf("write already in progress on %s, waiting for write complete\n", argumentArray[1]);
-					forkProcess = waitpid(writeLock[1][1], &childReturnStatus, 0); //may need to loop through these, get working w/ 1 then scale w/ doubling array size
-
-				}
-				else 
-				{
-					update(argumentArray[1],atoi(argumentArray[2]),argumentArray[3],argumentArray[4][0]);
-					writeLock[0] = argumentArray[1];//hash this? I need to preserve the forkProcess for use w/ waitpid
-					writeLock[1] = forkProcess;
-				}
+					//testing has not shown issues with simultaneous writes other than broken sequences of repeats.
+					//Write lock not implemented in this version of this shell.
 								
-				
+				update(argumentArray[1],atoi(argumentArray[2]),argumentArray[3],argumentArray[4][0]);
 			}
 
 			else
